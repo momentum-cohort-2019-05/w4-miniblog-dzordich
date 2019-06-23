@@ -1,0 +1,23 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h3>{{ blogpost.name }}</h3>
+
+    <h5><a href="">{{ blogpost.author }}</a></h5>
+    <h5 class="textright">{{ blogpost.date }}</h5>
+    <div></div>
+
+    <p>
+        {{ blogpost.content }}
+    </p>
+    <div></div>
+    <div>
+    {% for c in blogpost.comment_set.all %}
+        <div class="comment">
+            <h6>{{ c.commenter }}</h6>
+            <p>{{ c.content }}</p>
+            <p class="commentdate">{{ c.date }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
