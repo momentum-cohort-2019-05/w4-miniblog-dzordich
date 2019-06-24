@@ -28,13 +28,32 @@ body{
 }
 
 .pagetitle{
-    color:dodgerblue;
     font-family: "Helvetica Neue", "Arial", sans-serif;
     font-size: 3em;
     font-style:italic;
     font-weight: bold;
+    text-align: center;
+    color: whitesmoke;
 }
 
 .greytext {
     color:gray;
+}
+
+.menuBar{
+    background-color: darksalmon;
+    margin: 20px 0;
+    padding: 10px 0;
+    max-width: 100%;
+
+}
+
+.smallergreytext {
+    color:grey;
+    font-size: smaller;
+}
+
+.bloggerpage {
+    border: 0.2rem outset darksalmon;
+    padding: 20px;
 }

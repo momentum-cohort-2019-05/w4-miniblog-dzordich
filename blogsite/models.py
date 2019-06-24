@@ -16,7 +16,7 @@ class Blogger(models.Model):
         return f'{self.username}'
 
     def get_absolute_url(self):
-        return reverse('blogger', args=[str(self.id)])
+        return reverse('blogger-detail', args=[str(self.pk)])
 
 
 class BlogPost(models.Model):
@@ -50,7 +50,7 @@ class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.content[0:74]
+        return str(self.content)
 
     class Meta:
         ordering = ['date']

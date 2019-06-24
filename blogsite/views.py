@@ -1,8 +1,13 @@
-import datetime
-from django.shortcuts import render
+from django.contrib.auth import get_user
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views import generic
 
-from blogsite.models import Blogger, BlogPost
+from blogsite.models import Blogger, BlogPost, Comment
+from blogsite.forms import CommentForm
 # Create your views here.
 
 def index(request):
@@ -28,3 +33,34 @@ class BlogPostListView(generic.ListView):
 
 class BlogPostDetailView(generic.DetailView):
     model = BlogPost
+
+
+class BloggerListView(generic.ListView):
+    model = Blogger
+
+class BloggerDetailView(generic.DetailView):
+    model = Blogger
+
+@permission_required('blogsite.can_comment')
+def add_comment(request, pk):
+    blogpost = get_object_or_404(BlogPost, pk=pk)
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = Comment.objects.create(content=form.cleaned_data['user_comment'], commenter=get_user(request), post=blogpost)
+            comment.save()
+
+            return HttpResponseRedirect(reverse('index'))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = CommentForm()
+
+    context = {
+        'form': form,
+        'blogpost': blogpost,
+    }
+
+    return render(request, 'blogsite/add_comment.html', context)

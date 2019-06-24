@@ -21,4 +21,5 @@ class BlogPostInline(admin.TabularInline):
 
 @admin.register(Blogger)
 class BloggerAdmin(admin.ModelAdmin):
+    list_display = ('username', 'pk')
     inlines = [BlogPostInline]

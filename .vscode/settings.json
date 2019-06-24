@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "/Users/dzord/.local/share/virtualenvs/w4-miniblog-dzordich-6FrupwMF/bin/python"
+    "python.pythonPath": "/Users/dzord/.local/share/virtualenvs/w4-miniblog-dzordich-6FrupwMF/bin/python",
+    "python.linting.pylintArgs": [
+        "---errors-only"
+    ],
+    "files.eol": "\n",
 }

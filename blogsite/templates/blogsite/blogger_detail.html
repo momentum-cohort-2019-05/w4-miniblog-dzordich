@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="menuBar">
+        <h1 class="pagetitle">Sensational Blog</h1>
+      </div>
+    <h3>{{ blogger.username }}</h3>
+
+    <div class="bloggerpage">
+    <h5>Bio</h5>
+    <p>
+        {{ blogger.bio }}
+    </p>
+
+        <h5>{{ blogger.username }}'s posts:</h5>
+        <ul>
+            {% for post in blogger.blogpost_set.all %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.name }}</a>
+                <p class="smallergreytext">{{ post.post_date }}</p>                
+            </li>
+        {% endfor %}
+        </ul>
+
+
+    </div>
+{% endblock %}

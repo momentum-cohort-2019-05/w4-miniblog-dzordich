@@ -1,28 +1,21 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div class="menuBar">
   <h1 class="pagetitle">Sensational Blog</h1>
+</div>
     <p></p>
     <p>Welcome to Sensational Blog!</p>
     <p>Our site currently has <strong>{{ num_bloggers }}</strong> bloggers.</p>
     <p><strong>{{ num_posts }} </strong>blog entries have been made on this site.</p>
     <p>Latest blog post:</p>
     <div>
-        <h3>{{ latest_blog.name }}</h3>
+        <h3><a href="{{latest_blog.get_absolute_url }}">{{ latest_blog.name }}</a></h3>
         <h5 class="textright">{{ latest_blog.post_date }}</h5>
         <h5><a href="">{{ latest_blog.author }}</a></h5>
     
         <p>
-            {{ latest_blog.content }}
+            {{ latest_blog.content|truncatechars:256 }}
         </p>
-        <div></div>
-        <div>
-        {% for c in latest_blog.comment_set.all %}
-            <div class="comment">
-                <h6>{{ c.commenter }}</h6>
-                <p>{{ c.content }}</p>
-                <p class="commentdate">{{ c.date }}</p>
-            </div>
-        {% endfor %}
-    </div>
+        
 {% endblock %}

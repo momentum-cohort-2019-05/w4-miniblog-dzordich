@@ -1,15 +1,18 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
+<div class="menuBar">
+        <h1 class="pagetitle">Sensational Blog</h1>
+      </div>
     <h3>{{ blogpost.name }}</h3>
 
-    <h5><a href="">{{ blogpost.author }}</a></h5>
+    <h5><a href="{{ blogpost.author.get_absolute_url }}">{{ blogpost.author }}</a></h5>
     <h5 class="textright">{{ blogpost.date }}</h5>
     <div></div>
 
     <p>
         {{ blogpost.content }}
-    </p>
+ </p>   
     <div></div>
     <div>
     {% for c in blogpost.comment_set.all %}
@@ -20,4 +23,7 @@
         </div>
     {% endfor %}
     </div>
-{% endblock %}
+    <br>
+    <p>{% if perms.blogsite.can_comment %}- <a href="{% url 'add-comment' blogpost.pk %}">Add Comment</a></p>
+    {% endif %}
+    {% endblock %}

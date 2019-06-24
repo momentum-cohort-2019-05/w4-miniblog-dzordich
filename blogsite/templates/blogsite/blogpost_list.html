@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1 class="pagetitle">Blog Posts</h1>
+<div class="menuBar">
+    <h1 class="pagetitle">Sensational Blog</h1>
+  </div>
+  <h3>All Posts</h3>
   {% if blogpost_list %}
   <ul>
     {% for post in blogpost_list %}
